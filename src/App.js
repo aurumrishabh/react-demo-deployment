@@ -12,7 +12,6 @@ function App() {
         <Signin/>
         <DummyData/>
         {/*<BootstrapCheck/>*/}
-        <h2>git feature1</h2>
     </div>
   );
 }
