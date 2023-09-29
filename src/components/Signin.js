@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 
 function Signin(props) {
     const [user, setUser] = useState({});
-    const googleRef = useRef(null);
 
     useEffect(() => {
         const checkAndInitializeGoogleSignIn = async () => {
