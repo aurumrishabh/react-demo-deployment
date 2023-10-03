@@ -16,6 +16,7 @@ function DummyData(props) {
                 },
             });
             if(response.status === 200){
+                console.log("res: ",response);
                 return response;
             }
             else{
@@ -34,8 +35,10 @@ function DummyData(props) {
     useEffect(() => {
         if(runEffectRef.current){
             getDummyData().then((data)=> {
-                if(data !== undefined)
-                        setDummyData(data.data);
+                if(data !== undefined){
+                    if(data?.data && data?.data?.categories)
+                        setDummyData(data.data.categories);
+                }
             });
             runEffectRef.current = false;
         }
@@ -44,9 +47,9 @@ function DummyData(props) {
         <div>
             <ul>
                 {
-                    dummyData && dummyData !== undefined && dummyData.map((data)=>{
+                    dummyData && dummyData !== undefined && dummyData.length !== 0 && dummyData.map((data)=>{
                         return(
-                            <li key={data._id}>{data.text}</li>
+                            <li key={data.id}>{data.name}</li>
                         );
                     })
                 }
