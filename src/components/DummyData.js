@@ -7,9 +7,14 @@ function DummyData(props) {
 
     const getDummyData = async () => {
         try {
-            const url = process.env.REACT_APP_API_DOMAIN + "category-faq/";
+            const url = process.env.REACT_APP_API_DOMAIN + "category-faq";
             // const response = await axios.get('https://cat-fact.herokuapp.com/facts/');
-            const response = await axios.get(url);
+            const response = await axios.get (url,{
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
             if(response.status === 200){
                 return response;
             }
@@ -29,7 +34,7 @@ function DummyData(props) {
     useEffect(() => {
         if(runEffectRef.current){
             getDummyData().then((data)=> {
-                if(data != undefined)
+                if(data !== undefined)
                         setDummyData(data.data);
             });
             runEffectRef.current = false;
@@ -39,7 +44,7 @@ function DummyData(props) {
         <div>
             <ul>
                 {
-                    dummyData && dummyData != undefined && dummyData.map((data)=>{
+                    dummyData && dummyData !== undefined && dummyData.map((data)=>{
                         return(
                             <li key={data._id}>{data.text}</li>
                         );
@@ -51,5 +56,3 @@ function DummyData(props) {
 }
 
 export default DummyData;
-
-// I'm still getting the error as uAxiosError: Network Error\n   at XMLHttpRequest.handleError (http://localhost:3000/static/js/bundle.
